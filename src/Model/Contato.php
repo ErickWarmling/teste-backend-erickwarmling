@@ -46,4 +46,12 @@ class Contato
     public function setDescricao(string $descricao): void {
         $this->descricao = $descricao;
     }
+
+    public function getPessoa(): Pessoa {
+        return $this->pessoa;
+    }
+
+    public function setPessoa($pessoa): void {
+        $this->pessoa = $pessoa;
+    }
 }
