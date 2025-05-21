@@ -15,7 +15,9 @@ class ContatoController
 
     public function listarContatos() {
         try {
-            return $this->entityManager->getRepository(Contato::class)->findAll();
+            $contatos = $this->entityManager->getRepository(Contato::class)->findAll();
+
+            require __DIR__ . "/../View/Contato/ListarContatos.php";
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao listar contatos: " . $th->getMessage());
         }
@@ -36,6 +38,11 @@ class ContatoController
             $contato->setPessoa($pessoa);
             $this->entityManager->persist($contato);
             $this->entityManager->flush();
+
+            $tipoContato = Contato::getTipoContato();
+            $pessoas = $this->entityManager->getRepository(Pessoa::class)->findAll();
+
+            require __DIR__ . '/../View/Contato/CadastrarContato.php';
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao criar contato: " . $th->getMessage());
         }
@@ -53,6 +60,10 @@ class ContatoController
             $contato->setTipo($tipo);
             $contato->setDescricao($descricao);
             $this->entityManager->flush();
+
+            $tipoContato = Contato::getTipoContato();
+
+            require __DIR__ . '/../View/Contato/AtualizarContato.php';
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao atualizar contato: " . $th->getMessage());
         }
@@ -69,6 +80,7 @@ class ContatoController
 
             $this->entityManager->remove($contato);
             $this->entityManager->flush();
+
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao excluir contato: " . $th->getMessage());
         }

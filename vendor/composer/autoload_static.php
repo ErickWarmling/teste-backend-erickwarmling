@@ -37,6 +37,10 @@ class ComposerStaticInit3ba5865ee439cf319452b0df1a1dfb7c
             'Psr\\Container\\' => 14,
             'Psr\\Cache\\' => 10,
         ),
+        'M' => 
+        array (
+            'Model\\' => 6,
+        ),
         'D' => 
         array (
             'Doctrine\\Persistence\\' => 21,
@@ -48,6 +52,10 @@ class ComposerStaticInit3ba5865ee439cf319452b0df1a1dfb7c
             'Doctrine\\Common\\Lexer\\' => 22,
             'Doctrine\\Common\\Collections\\' => 28,
             'Doctrine\\Common\\' => 16,
+        ),
+        'C' => 
+        array (
+            'Controller\\' => 11,
         ),
     );
 
@@ -108,6 +116,10 @@ class ComposerStaticInit3ba5865ee439cf319452b0df1a1dfb7c
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
         ),
+        'Model\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Model',
+        ),
         'Doctrine\\Persistence\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/persistence/src/Persistence',
@@ -143,6 +155,10 @@ class ComposerStaticInit3ba5865ee439cf319452b0df1a1dfb7c
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/event-manager/src',
+        ),
+        'Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Controller',
         ),
     );
 

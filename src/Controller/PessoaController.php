@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+
 use Doctrine\ORM\EntityManager;
 use Model\Pessoa;
 
@@ -14,24 +15,35 @@ class PessoaController
 
     public function listarPessoas() {
         try {
-            return $this->entityManager->getRepository(Pessoa::class)->findAll();
-        } catch (\Throwable $th) {
-            throw new \Exception("Erro ao listar pessoas: " . $th->getMessage());
-        }
+            $pessoas = $this->entityManager->getRepository(Pessoa::class)->findAll();
 
+            require __DIR__ . './../View/Pessoa/ListarPessoas.php';
+        } catch (\Throwable $th) {
+            echo("Erro ao listar pessoas: " . $th->getMessage());
+        }
     }
 
     public function criarPessoa($nome, $cpf) {
         try {
+            $pessoaExistente = $this->entityManager->getRepository(Pessoa::class)->findOneBy(['cpf' => $cpf]);
+
+            if ($pessoaExistente) {
+                echo "Já existe pessoa cadastrada com este CPF";
+                return;
+            }
+
             $pessoa = new Pessoa();
             $pessoa->setNome($nome);
             $pessoa->setCpf($cpf);
             $this->entityManager->persist($pessoa);
             $this->entityManager->flush();
-        } catch (\Throwable $th) {
-            throw new \Exception("Erro ao criar pessoa: " . $th->getMessage());
-        }
 
+            header("Location: /pessoas");
+            exit;
+
+        } catch (\Throwable $th) {
+            echo "Erro ao criar pessoa: " . $th->getMessage();
+        }
     }
 
     public function atualizarPessoa($id, $nome, $cpf) {
@@ -39,15 +51,17 @@ class PessoaController
             $pessoa = $this->entityManager->find(Pessoa::class, $id);
 
             if (!$pessoa) {
-                throw new \Exception("Pessoa não encontrada com o id: " . $id);
+                echo("Pessoa não encontrada com o id: " . $id);
                 return;
             }
 
             $pessoa->setNome($nome);
             $pessoa->setCpf($cpf);
             $this->entityManager->flush();
+
+            require __DIR__ . './../View/Pessoa/AtualizarPessoa.php';
         } catch (\Throwable $th) {
-            throw new \Exception("Erro ao atualizar pessoa: " . $th->getMessage());
+            echo "Erro ao atualizar pessoa: " . $th->getMessage();
         }
     }
 
@@ -62,8 +76,10 @@ class PessoaController
 
             $this->entityManager->remove($pessoa);
             $this->entityManager->flush();
+
+            header('location: /pessoas');
         } catch (\Throwable $th) {
-            throw new \Exception("Erro ao excluir pessoa: " . $th->getMessage());
+            echo "Erro ao excluir pessoa: " . $th->getMessage();
         }
      }
 
@@ -73,8 +89,10 @@ class PessoaController
             $query = $this->entityManager->createQuery($sql);
             $query->setParameter('nomePessoa', '%' . $nomePessoa . '%');
             return $query->getResult();
+
+            require __DIR__ . './../View/Pessoa/ListarPessoas.php';
         } catch (\Throwable $th) {
-            throw new \Exception("Erro ao buscar pessoa: " . $th->getMessage());
+            echo "Erro ao buscar pessoa: " . $th->getMessage();
         }
      }
 }

@@ -31,8 +31,12 @@ class Contato
         return $this->tipo;
     }
 
+    public static function getTipoContato() {
+        return ["E-mail", "Telefone"];
+    }
+
     public function setTipo(string $tipo): void {
-        $tipoContato = ["E-mail", "Telefone"];
+        $tipoContato = self::getTipoContato();
         if(!in_array($tipo, $tipoContato)) {
             throw new \InvalidArgumentException("Informe um tipo de contato válido: E-mail ou Telefone");
         }
