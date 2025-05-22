@@ -42,13 +42,14 @@ class ContatoController
             $tipoContato = Contato::getTipoContato();
             $pessoas = $this->entityManager->getRepository(Pessoa::class)->findAll();
 
-            require __DIR__ . '/../View/Contato/CadastrarContato.php';
+            header("Location: /contatos");
+            exit;
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao criar contato: " . $th->getMessage());
         }
     }
 
-    public function atualizarContato($id, $tipo, $descricao) {
+    public function atualizarContato($id, $tipo, $descricao, $pessoaId) {
         try {
             $contato = $this->entityManager->find(Contato::class, $id);
 
@@ -57,13 +58,21 @@ class ContatoController
                 return;
             }
 
+            $pessoa = $this->entityManager->find(Pessoa::class, $pessoaId);
+
+            if (!$pessoa) {
+                throw new \Exception("Pessoa não encontrada com o id: " . $pessoaId);
+            }
+
             $contato->setTipo($tipo);
             $contato->setDescricao($descricao);
+            $contato->setPessoa($pessoa);
             $this->entityManager->flush();
 
             $tipoContato = Contato::getTipoContato();
 
-            require __DIR__ . '/../View/Contato/AtualizarContato.php';
+            header("Location: /contatos");
+            exit;
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao atualizar contato: " . $th->getMessage());
         }
@@ -81,6 +90,7 @@ class ContatoController
             $this->entityManager->remove($contato);
             $this->entityManager->flush();
 
+            header('location: /contatos');
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao excluir contato: " . $th->getMessage());
         }

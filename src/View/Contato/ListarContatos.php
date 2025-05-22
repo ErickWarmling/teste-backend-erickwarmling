@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Contatos</title>
-    <link rel="stylesheet" href="../../../public/styles.css?v=123">
+    <link rel="stylesheet" href="../../../public/styles.css">
 </head>
 <body>
 <div class="container">
@@ -14,27 +14,31 @@
     </header>
 
     <section class="lista-contatos">
-        <h1>Contatos</h1>
-        <button class="botaoNovoContato" onclick="window.location.href='/cadastrarContato'">Novo Contato</button>
+        <div class="cabecalho-contatos">
+            <h1>Contatos</h1>
+            <button class="botaoPadrao" onclick="window.location.href='/cadastrarContato'">Novo Contato</button>
+        </div>
         <table>
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Nome</th>
-                <th>CPF</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Pessoa</th>
                 <th>Opções</th>
             </tr>
             </thead>
             <tbody>
-            <?php if (!empty($pessoas)) {
-                foreach ($pessoas as $pessoa): ?>
+            <?php if (!empty($contatos)) {
+                foreach ($contatos as $contato): ?>
                     <tr>
-                        <td><?php echo $pessoa->getId(); ?></td>
-                        <td><?php echo $pessoa->getNome(); ?></td>
-                        <td><?php echo $pessoa->getCpf(); ?></td>
+                        <td><?php echo $contato->getId(); ?></td>
+                        <td><?php echo $contato->getTipo(); ?></td>
+                        <td><?php echo $contato->getDescricao(); ?></td>
+                        <td><?php echo $contato->getPessoa()->getNome(); ?></td>
                         <td class="opcoes">
-                            <button class="botaoAcao" onclick="window.location.href='/editarPessoa?id=<?= $pessoa->getId() ?>'">Editar</button>
-                            <button class="botaoAcao" onclick="window.location.href='/deletarPessoa?id=<?= $pessoa->getId() ?>'">Excluir</button>
+                            <button class="botaoPadrao" onclick="window.location.href='/editarContato?id=<?= $contato->getId() ?>'">Editar</button>
+                            <button class="botaoPadrao" onclick="window.location.href='/deletarContato?id=<?= $contato->getId() ?>'">Excluir</button>
                         </td>
                     </tr>
                 <?php endforeach;

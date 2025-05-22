@@ -78,16 +78,6 @@ input {
     font-size: 15px;
 }
 
-.botaoNovoContato {
-    border-radius: 10px;
-    border: none;
-    color: white;
-    background-color: #34915E;
-    cursor: pointer;
-    font-size: 15px;
-    margin: 16px;
-}
-
 h1 {
     margin-bottom: 20px;
     color: #34915E;
@@ -118,4 +108,10 @@ table th {
 
 table td {
     text-align: center;
+}
+
+.cabecalho-contatos {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
 }

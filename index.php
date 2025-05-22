@@ -2,7 +2,10 @@
 require_once "vendor/autoload.php";
 
 use Controller\ContatoController;
+use Controller\PessoaController;
 use Doctrine\ORM\Tools\Setup;
+use Model\Contato;
+use Model\Pessoa;
 
 $entityManager = require __DIR__ . "/config/bootstrap.php";
 
@@ -80,6 +83,13 @@ switch ($rota) {
             break;
 
         case '/cadastrarContato':
+            if ($metodoHTTP == 'GET') {
+                $tipoContato = Contato::getTipoContato();
+                $pessoas = $entityManager->getRepository(\Model\Pessoa::class)->findAll();
+
+                require __DIR__ . '/src/View/Contato/CadastrarContato.php';
+            }
+
             if ($metodoHTTP == 'POST') {
                 $tipo = $_POST['tipo_contato'];
                 $descricao = $_POST['descricao'];
@@ -90,18 +100,31 @@ switch ($rota) {
             break;
 
         case '/editarContato':
+            if ($metodoHTTP == 'GET') {
+                $id = $_GET['id'];
+
+                if ($id) {
+                    $contato = $entityManager->find(\Model\Contato::class, $id);
+                    $tipoContato = \Model\Contato::getTipoContato();
+                    $pessoas = $entityManager->getRepository(\Model\Pessoa::class)->findAll();
+                }
+
+                require __DIR__ . '/src/View/Contato/AtualizarContato.php';
+            }
+
             if ($metodoHTTP == 'POST') {
-                $id = $_GET['idContato'];
+                $id = $_GET['id'];
                 $tipo = $_POST['tipo_contato'];
                 $descricao = $_POST['descricao'];
+                $pessoaId = $_POST['pessoa'];
 
-                $contatoController->atualizarContato($id, $tipo, $descricao);
+                $contatoController->atualizarContato($id, $tipo, $descricao, $pessoaId);
             }
             break;
 
         case '/deletarContato':
             if ($metodoHTTP == 'GET') {
-                $id = $_GET['idContato'];
+                $id = $_GET['id'];
 
                 $contatoController->excluirContato($id);
             }

@@ -15,29 +15,42 @@
 
     <section class="cadastro">
         <h1>Editar Contato</h1>
-        <form action="/editarContato" method="POST">
+        <form action="/editarContato?id=<?= $contato->getId() ?>" method="POST">
             <label for="id">ID:</label>
             <br>
-            <input type="text" name="idContato" id="idContato" readonly>
+            <input type="text" name="idContato" id="idContato" value="<?= $contato->getId() ?>" readonly>
             <br>
-            <label for="nome">Tipo:</label>
+            <label for="tipo">Tipo:</label>
             <br>
-            <select id="tipo_contato" name="tipo_contato" required>
-                    <option></option>
+            <select id="tipo_contato" name="tipo_contato" value="<?= $contato->getTipo() ?>" required>
+                <?php
+                if (!empty($tipoContato)){
+                    foreach ($tipoContato as $tipo): ?>
+                        <option value=<?= $tipo ?>><?= $tipo ?></option>
+                    <?php endforeach; } ?>
             </select>
             <br>
             <label>Descrição:</label>
             <br>
-            <input type="text" name="descricao" id="descricao">
+            <input type="text" name="descricao" id="descricao" value="<?= $contato->getDescricao() ?>" required>
             <br>
-            <label for="cpf">Pessoa:</label>
+            <label for="pessoa">Pessoa:</label>
             <br>
-            <select id="pessoa" name="pessoa" required>
+            <select id="pessoa" name="pessoa">
+                <?php
+                if (!empty($pessoas)) {
+                    foreach ($pessoas as $pessoa): ?>
+                        <option value="<?= $pessoa->getId() ?>"
+                            <?= $pessoa->getId() === $contato->getPessoa()->getId() ? 'selected' : '' ?>>
+                            <?= $pessoa->getNome() ?>
+                        </option>
+                    <?php endforeach;
+                } ?>
             </select>
             <br>
             <button class="botaoSalvar" type="submit">Salvar</button>
         </form>
-        <a href="#">Voltar</a>
+        <a href="/contatos">Voltar</a>
     </section>
 </div>
 </body>

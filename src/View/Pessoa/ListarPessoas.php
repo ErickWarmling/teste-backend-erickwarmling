@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Pessoas</title>
-    <link rel="stylesheet" href="../../../public/styles.css?v=123">
+    <link rel="stylesheet" href="../../../public/styles.css">
 </head>
 <body>
 <div class="container">
