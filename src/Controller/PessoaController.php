@@ -59,7 +59,8 @@ class PessoaController
             $pessoa->setCpf($cpf);
             $this->entityManager->flush();
 
-            require __DIR__ . './../View/Pessoa/AtualizarPessoa.php';
+            header("Location: /pessoas");
+            exit;
         } catch (\Throwable $th) {
             echo "Erro ao atualizar pessoa: " . $th->getMessage();
         }
@@ -88,7 +89,7 @@ class PessoaController
             $sql = "SELECT pessoa FROM Model\Pessoa pessoa WHERE pessoa.nome LIKE :nomePessoa";
             $query = $this->entityManager->createQuery($sql);
             $query->setParameter('nomePessoa', '%' . $nomePessoa . '%');
-            return $query->getResult();
+            $pessoas = $query->getResult();
 
             require __DIR__ . './../View/Pessoa/ListarPessoas.php';
         } catch (\Throwable $th) {

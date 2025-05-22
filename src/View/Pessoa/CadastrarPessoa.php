@@ -18,11 +18,11 @@
             <form id="form_pessoa" action="/cadastrarPessoa" METHOD="POST">
                 <label for="nome">Nome:</label>
                 <br>
-                <input type="text" name="nome" id="nome">
+                <input type="text" name="nome" id="nome" required>
                 <br>
                 <label for="cpf">CPF:</label>
                 <br>
-                <input type="text" name="cpf" id="cpf">
+                <input type="text" name="cpf" id="cpf" required>
                 <br>
                 <button class="botaoSalvar" type="submit">Salvar</button>
             </form>
@@ -32,14 +32,7 @@
 </body>
 <script>
     document.getElementById('form_pessoa').addEventListener('submit', function (event) {
-        const nome = document.getElementById('nome').value.trim();
         const cpf = document.getElementById('cpf').value.trim();
-
-        if (nome === '' || cpf == '') {
-            alert("Preencha todos os campos!");
-            event.preventDefault();
-            return;
-        }
 
         const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
 

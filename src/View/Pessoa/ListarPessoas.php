@@ -2,14 +2,14 @@
 <html>
 <head>
     <title>Pessoas</title>
-    <link rel="stylesheet" href="../../../public/styles.css">
+    <link rel="stylesheet" href="../../../public/styles.css?v=123">
 </head>
 <body>
 <div class="container">
     <header>
         <nav class="menu_navegacao">
-            <a href="#">Pessoas</a>
-            <a href="#">Contatos</a>
+            <a href="/pessoas">Pessoas</a>
+            <a href="/contatos">Contatos</a>
         </nav>
     </header>
 
@@ -18,10 +18,10 @@
             <h1>Pessoas</h1>
             <div class="pesquisa_pessoa">
                 <form action="/buscarPessoa" method="GET">
-                    <input type="text" name="nome" id="nome" placeholder="Informe o nome da pessoa">
-                    <button class="botaoPesquisar" type="submit">Pesquisar</button>
+                    <input class="inputPesquisaNome" type="text" name="nome" id="nome" placeholder="Informe o nome da pessoa">
+                    <button class="botaoPadrao" type="submit">Pesquisar</button>
                 </form>
-                <button class="botaoNovo" onclick="window.location.href='/cadastrarPessoa'">Nova Pessoa</button>
+                <button class="botaoPadrao" onclick="window.location.href='/cadastrarPessoa'">Nova Pessoa</button>
             </div>
         </div>
         <table>
@@ -40,9 +40,9 @@
                             <td><?php echo $pessoa->getId(); ?></td>
                             <td><?php echo $pessoa->getNome(); ?></td>
                             <td><?php echo $pessoa->getCpf(); ?></td>
-                            <td>
-                                <button class="botaoAcao">Editar</button>
-                                <button class="botaoAcao">Excluir</button>
+                            <td class="opcoes">
+                                <button class="botaoPadrao" onclick="window.location.href='/editarPessoa?id=<?= $pessoa->getId() ?>'">Editar</button>
+                                <button class="botaoPadrao" onclick="window.location.href='/deletarPessoa?id=<?= $pessoa->getId() ?>'">Excluir</button>
                             </td>
                         </tr>
                     <?php endforeach;

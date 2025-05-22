@@ -38,8 +38,18 @@ switch ($rota) {
         break;
 
     case '/editarPessoa':
+        if ($metodoHTTP == 'GET') {
+            $id =$_GET['id'];
+
+            if ($id) {
+                $pessoa = $entityManager->find(\Model\Pessoa::class, $id);
+            }
+
+            require __DIR__ . '/src/View/Pessoa/AtualizarPessoa.php';
+        }
+
         if ($metodoHTTP == 'POST') {
-            $id = $_GET['idPessoa'];
+            $id = $_GET['id'];
             $nome = $_POST['nome'];
             $cpf = $_POST['cpf'];
 
@@ -49,7 +59,7 @@ switch ($rota) {
 
         case '/deletarPessoa':
             if ($metodoHTTP == 'GET') {
-                $id = $_GET['idPessoa'];
+                $id = $_GET['id'];
 
                 $pessoaController->excluirPessoa($id);
             }

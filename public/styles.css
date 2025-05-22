@@ -56,6 +56,10 @@ input {
     padding: 5px;
 }
 
+.inputPesquisaNome {
+    width: 50%;
+}
+
 .botaoSalvar {
     border-radius: 10px;
     padding: 5px;
@@ -65,7 +69,53 @@ input {
     font-size: 15px;
 }
 
+.botaoPadrao {
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #34915E;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.botaoNovoContato {
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #34915E;
+    cursor: pointer;
+    font-size: 15px;
+    margin: 16px;
+}
+
 h1 {
     margin-bottom: 20px;
     color: #34915E;
+}
+
+.lista_pessoas .cabecalho {
+    margin: 20px;
+}
+
+.lista_pessoas .cabecalho .pesquisa_pessoa {
+    display: flex;
+}
+
+.lista_pessoas .cabecalho .pesquisa_pessoa form {
+    width: 90%;
+}
+
+table {
+    width: 100%;
+}
+
+table th {
+    background-color: #34915E;
+    color: white;
+    font-size: 15px;
+    border-radius: 3px;
+}
+
+table td {
+    text-align: center;
 }
