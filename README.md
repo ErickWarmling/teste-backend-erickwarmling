@@ -27,6 +27,8 @@
    docker-compose up -d
    ```
 
+4. Navegue pelas funcionalidades do Sistema:
+
 ### Funcionamento do Sistema
 
 1. Acesse o sistema no navegador com a seguinte URL:
