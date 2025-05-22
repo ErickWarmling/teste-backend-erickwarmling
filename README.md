@@ -33,6 +33,3 @@
    ``` bash
    http://localhost:8000
   ```
-
-
-Funcionamento do Sistema
