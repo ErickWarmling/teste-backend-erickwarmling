@@ -27,11 +27,33 @@
    docker-compose up -d
    ```
 
-4. Navegue pelas funcionalidades do Sistema:
-
 ### Funcionamento do Sistema
 
 1. Acesse o sistema no navegador com a seguinte URL:
    ``` bash
    http://localhost:8000
-  ```
+   ```
+   
+2. Navegue pelas funcionalidades do sistema:
+   - **Listar Pessoas:** Página inicial do sistema, com um campo de pesquisa e com a lista de pessoas cadastradas.
+   - **Cadastrar Pessoa:** Permite adicionar uma nova pessoa.
+   - **Editar Pessoa:** Permite alterar os dados de uma pessoa já cadastrada.
+   - **Excluir Pessoa:** Remove uma pessoa do sistema.
+   - **Listar Contatos:** Exibe uma lista de contatos associados às pessoas.
+   - **Cadastrar Contato:** Permite adicionar um novo contato.
+   - **Editar Contato:** Permite alterar os dados de um contato.
+   - **Excluir Contato:** Remove um contato do sistema.
+
+### Imagens do Sistema
+![image](https://github.com/user-attachments/assets/c0da882a-2999-40e9-9666-d83e48e827c2)
+![image](https://github.com/user-attachments/assets/22129225-26f5-423e-ad5e-26c645daeffa)
+![image](https://github.com/user-attachments/assets/93012979-6718-4d7d-b092-96bac39508de)
+![image](https://github.com/user-attachments/assets/0c8bfc00-7161-4058-976b-dbf7f3bdc3d1)
+
+
+### Considerações Finais
+
+Coloco-me à disposição para esclarecer quaisquer dúvidas em relação ao projeto desenvolvido.
+
+Erick Augusto Warmling
+E-mail: [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
