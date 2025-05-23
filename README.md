@@ -26,6 +26,7 @@
    ``` bash
    docker-compose up -d
    ```
+**Observação:** Os comandos 4 e 5 devem ser executados apenas se o Banco de Dados ainda não tiver sido inicializado ou caso tenham sido feitas alterações nas entidades. 
 
 4. Acesse o container PHP:
    ``` bash
