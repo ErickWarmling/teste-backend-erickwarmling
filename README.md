@@ -70,4 +70,4 @@ Coloco-me à disposição para esclarecer quaisquer dúvidas em relação ao pro
 
 Erick Augusto Warmling
 <br>
-E-mail: [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
+**E-mail:** [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
