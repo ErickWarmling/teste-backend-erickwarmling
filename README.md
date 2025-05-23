@@ -56,4 +56,5 @@
 Coloco-me à disposição para esclarecer quaisquer dúvidas em relação ao projeto desenvolvido.
 
 Erick Augusto Warmling
+
 E-mail: [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
