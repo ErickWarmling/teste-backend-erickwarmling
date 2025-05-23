@@ -27,6 +27,16 @@
    docker-compose up -d
    ```
 
+4. Entre no container PHP:
+   ``` bash
+   docker exec -it sistema-contatos-php bash
+   ```
+
+5. Rode o seguinte comando para criar as entidades no Banco de Dados:
+   ``` bash
+   php bin/doctrine.php orm:schema-tool:create
+   ```
+
 ### Funcionamento do Sistema
 
 1. Acesse o sistema no navegador com a seguinte URL:
