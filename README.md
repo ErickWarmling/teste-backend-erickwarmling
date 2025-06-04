@@ -22,9 +22,22 @@
    git clone https://github.com/ErickWarmling/teste-backend-erickwarmling.git
    cd teste-backend-erickwarmling/
    ```
-3. Rode os contêiners:
+3. Inicie os contêiners:
    ``` bash
    docker-compose up -d
+   ```
+**Observação:** Os comandos 4 e 5 devem ser executados apenas se o Banco de Dados ainda não tiver sido inicializado ou caso tenham sido feitas alterações nas entidades. 
+
+4. Acesse o container PHP:
+   ``` bash
+   docker exec -it sistema-contatos-php bash
+   ```
+
+5. Crie as entidades no Banco de Dados
+   <br>
+   Execute o comando dentro do contêiner para criar as tabelas conforme as entidades:
+   ``` bash
+   php bin/doctrine.php orm:schema-tool:create
    ```
 
 ### Funcionamento do Sistema
@@ -57,4 +70,4 @@ Coloco-me à disposição para esclarecer quaisquer dúvidas em relação ao pro
 
 Erick Augusto Warmling
 <br>
-E-mail: [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
+**E-mail:** [warmling.erick@gmail.com](mailto:warmling.erick@gmail.com)
