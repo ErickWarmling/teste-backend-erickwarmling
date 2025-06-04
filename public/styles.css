@@ -110,7 +110,7 @@ table td {
     text-align: center;
 }
 
-.cabecalho-contatos {
+.cabecalho_contatos {
     display: flex;
     justify-content: space-between;
     margin: 20px;

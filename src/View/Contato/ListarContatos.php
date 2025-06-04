@@ -13,8 +13,8 @@
         </nav>
     </header>
 
-    <section class="lista-contatos">
-        <div class="cabecalho-contatos">
+    <section class="lista_contatos">
+        <div class="cabecalho_contatos">
             <h1>Contatos</h1>
             <button class="botaoPadrao" onclick="window.location.href='/cadastrarContato'">Novo Contato</button>
         </div>
