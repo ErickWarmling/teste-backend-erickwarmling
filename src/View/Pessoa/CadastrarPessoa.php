@@ -22,7 +22,7 @@
                 <br>
                 <label for="cpf">CPF:</label>
                 <br>
-                <input type="text" name="cpf" id="cpf" required>
+                <input type="text" name="cpf" id="cpf" maxlength="14" required>
                 <br>
                 <button class="botaoSalvar" type="submit">Salvar</button>
             </form>
