@@ -15,7 +15,7 @@
 
     <section class="cadastro">
         <h1>Editar Contato</h1>
-        <form action="/editarContato?id=<?= $contato->getId() ?>" method="POST">
+        <form id="form_contato" action="/editarContato?id=<?= $contato->getId() ?>" method="POST">
             <label for="id">ID:</label>
             <br>
             <input type="text" name="idContato" id="idContato" value="<?= $contato->getId() ?>" readonly>
@@ -26,8 +26,10 @@
                 <?php
                 if (!empty($tipoContato)){
                     foreach ($tipoContato as $tipo): ?>
-                        <option value=<?= $tipo ?>><?= $tipo ?></option>
-                    <?php endforeach; } ?>
+                        <option value="<?= $tipo ?>" <?= ($tipo === $contato->getTipo()) ? 'selected' : '' ?>>
+                            <?= $tipo ?>
+                        </option>
+                    <?php endforeach;} ?>
             </select>
             <br>
             <label>Descrição:</label>
@@ -44,8 +46,7 @@
                             <?= $pessoa->getId() === $contato->getPessoa()->getId() ? 'selected' : '' ?>>
                             <?= $pessoa->getNome() ?>
                         </option>
-                    <?php endforeach;
-                } ?>
+                    <?php endforeach;} ?>
             </select>
             <br>
             <button class="botaoSalvar" type="submit">Salvar</button>
@@ -54,4 +55,20 @@
     </section>
 </div>
 </body>
+<script>
+    document.getElementById('form_contato').addEventListener('submit', function (event) {
+        const tipoContato = document.getElementById('tipo_contato').value;
+        const descricao = document.getElementById('descricao').value.trim();
+
+        if (tipoContato === 'Telefone') {
+            const telefoneRegex = /^\(\d{2}\)\s9\d{4}-\d{4}$/;
+
+            if (!telefoneRegex.test(descricao)) {
+                alert("Informe um telefone válido, seguindo o padrão: (XX) XXXXX-XXXX");
+                event.preventDefault();
+                return;
+            }
+        }
+    })
+</script>
 </html>

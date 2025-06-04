@@ -29,15 +29,13 @@ class PessoaController
     {
         try {
             if (!$this->validarCPF($cpf)) {
-                echo('CPF inválido. Verifique o formato e os dígitos');
-                return;
+                throw new \Exception('CPF inválido. Verifique o formato e os dígitos');
             }
 
             $pessoaExistente = $this->entityManager->getRepository(Pessoa::class)->findOneBy(['cpf' => $cpf]);
 
             if ($pessoaExistente) {
-                echo "Já existe pessoa cadastrada com este CPF";
-                return;
+                throw new \Exception("Já existe pessoa cadastrada com este CPF");
             }
 
             $pessoa = new Pessoa();
@@ -58,21 +56,18 @@ class PessoaController
     {
         try {
             if (!$this->validarCPF($cpf)) {
-                echo('CPF inválido. Verifique o formato e os dígitos');
-                return;
+                throw new \Exception('CPF inválido. Verifique o formato e os dígitos');
             }
 
             $pessoa = $this->entityManager->find(Pessoa::class, $id);
 
             if (!$pessoa) {
-                echo("Pessoa não encontrada com o id: " . $id);
-                return;
+                throw new \Exception("Pessoa não encontrada com o id: " . $id);
             }
 
             $pessoaExistente = $this->entityManager->getRepository(Pessoa::class)->findOneBy(['cpf' => $cpf]);
             if ($pessoaExistente && $pessoaExistente->getId() != $id) {
-                echo ('Já existe outra pessoa cadastrada com este CPF');
-                return;
+                throw new \Exception('Já existe outra pessoa cadastrada com este CPF');
             }
 
             $pessoa->setNome($nome);
@@ -82,7 +77,7 @@ class PessoaController
             header("Location: /pessoas");
             exit;
         } catch (\Throwable $th) {
-            echo "Erro ao atualizar pessoa: " . $th->getMessage();
+            throw new \Exception("Erro ao atualizar pessoa: " . $th->getMessage());
         }
     }
 
@@ -92,8 +87,7 @@ class PessoaController
             $pessoa = $this->entityManager->find(Pessoa::class, $id);
 
             if (!$pessoa) {
-                echo "Pessoa não encontrada com id: " . $id;
-                return;
+                throw new \Exception("Pessoa não encontrada com id: " . $id);
             }
 
             $this->entityManager->remove($pessoa);
@@ -102,7 +96,7 @@ class PessoaController
             header('location: /pessoas');
             exit;
         } catch (\Throwable $th) {
-            echo "Erro ao excluir pessoa: " . $th->getMessage();
+            throw new \Exception("Erro ao excluir pessoa: " . $th->getMessage());
         }
     }
 
@@ -116,7 +110,7 @@ class PessoaController
 
             require __DIR__ . './../View/Pessoa/ListarPessoas.php';
         } catch (\Throwable $th) {
-            echo "Erro ao buscar pessoa: " . $th->getMessage();
+            throw new("Erro ao buscar pessoa: " . $th->getMessage());
         }
     }
 

@@ -25,11 +25,18 @@ class ContatoController
 
     public function criarContato($tipo, $descricao, $pessoaId) {
         try {
+            $this->validarContato($tipo, $descricao);
+
+            $contatoExistente = $this->entityManager->getRepository(Contato::class)->findOneBy(['tipo' => $tipo, 'descricao' => $descricao]);
+
+            if ($contatoExistente) {
+                throw new \Exception("O contato informado já está cadastrado");
+            }
+
             $pessoa = $this->entityManager->find(Pessoa::class, $pessoaId);
 
             if(!$pessoa) {
                 throw new \Exception("Pessoa não encontrada com o id: " . $pessoaId);
-                return;
             }
 
             $contato = new Contato();
@@ -51,11 +58,18 @@ class ContatoController
 
     public function atualizarContato($id, $tipo, $descricao, $pessoaId) {
         try {
+            $this->validarContato($tipo, $descricao);
+
             $contato = $this->entityManager->find(Contato::class, $id);
 
             if (!$contato) {
                 throw new \Exception("Contato não encontrado com o id: " . $id);
-                return;
+            }
+
+            $contatoExistente = $this->entityManager->getRepository(Contato::class)->findOneBy(['tipo' => $tipo, 'descricao' => $descricao]);
+
+            if ($contatoExistente && $contatoExistente->getId() != $id) {
+                throw new \Exception("O contato informado já está cadastrado");
             }
 
             $pessoa = $this->entityManager->find(Pessoa::class, $pessoaId);
@@ -84,15 +98,25 @@ class ContatoController
 
             if (!$contato) {
                 throw new \Exception("Contato não encontrado com o id: " . $id);
-                return;
             }
 
             $this->entityManager->remove($contato);
             $this->entityManager->flush();
 
             header('location: /contatos');
+            exit;
         } catch (\Throwable $th) {
             throw new \Exception("Erro ao excluir contato: " . $th->getMessage());
+        }
+    }
+
+    public function validarContato($tipo, $descricao) {
+        if ($tipo == "E-mail" && !filter_var($descricao, FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception('O e-mail é inválido');
+        }
+
+        if ($tipo == 'Telefone' && !preg_match('/^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$/', $descricao)) {
+            throw new \Exception('O telefone é inválido');
         }
     }
 }

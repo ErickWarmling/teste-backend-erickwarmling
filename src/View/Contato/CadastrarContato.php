@@ -15,7 +15,7 @@
 
     <section class="cadastro">
         <h1>Cadastrar Contato</h1>
-        <form action="/cadastrarContato" method="POST">
+        <form id="form_contato" action="/cadastrarContato" method="POST">
             <label for="tipo">Tipo:</label>
             <br>
             <select id="tipo_contato" name="tipo_contato" required>
@@ -47,4 +47,20 @@
     </section>
 </div>
 </body>
+<script>
+    document.getElementById('form_contato').addEventListener('submit', function (event) {
+        const tipoContato = document.getElementById('tipo_contato').value;
+        const descricao = document.getElementById('descricao').value.trim();
+
+        if (tipoContato === 'Telefone') {
+            const telefoneRegex = /^\(\d{2}\)\s9\d{4}-\d{4}$/;
+
+            if (!telefoneRegex.test(descricao)) {
+                alert("Informe um telefone válido, seguindo o padrão: (XX) XXXXX-XXXX");
+                event.preventDefault();
+                return;
+            }
+        }
+    })
+</script>
 </html>
