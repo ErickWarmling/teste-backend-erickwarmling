@@ -21,7 +21,7 @@ class PessoaController
 
             require __DIR__ . './../View/Pessoa/ListarPessoas.php';
         } catch (\Throwable $th) {
-            echo("Erro ao listar pessoas: " . $th->getMessage());
+            throw new \Exception("Erro ao listar pessoas: " . $th->getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ class PessoaController
             exit;
 
         } catch (\Throwable $th) {
-            echo "Erro ao criar pessoa: " . $th->getMessage();
+            throw new \Exception("Erro ao criar pessoa: " . $th->getMessage());
         }
     }
 

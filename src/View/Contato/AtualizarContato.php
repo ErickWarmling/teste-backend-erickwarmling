@@ -22,7 +22,7 @@
             <br>
             <label for="tipo">Tipo:</label>
             <br>
-            <select id="tipo_contato" name="tipo_contato" value="<?= $contato->getTipo() ?>" required>
+            <select id="tipo_contato" name="tipo_contato" required>
                 <?php
                 if (!empty($tipoContato)){
                     foreach ($tipoContato as $tipo): ?>

@@ -1,5 +1,5 @@
 <?php
-require_once "vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
 use Controller\ContatoController;
 use Controller\PessoaController;
@@ -9,8 +9,8 @@ use Model\Pessoa;
 
 $entityManager = require __DIR__ . "/config/bootstrap.php";
 
-$pessoaController = new \Controller\PessoaController($entityManager);
-$contatoController = new \Controller\ContatoController($entityManager);
+$pessoaController = new PessoaController($entityManager);
+$contatoController = new ContatoController($entityManager);
 
 $rota = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $metodoHTTP = $_SERVER["REQUEST_METHOD"];
@@ -36,7 +36,6 @@ switch ($rota) {
             $cpf = $_POST['cpf'];
 
             $pessoaController->criarPessoa($nome, $cpf);
-            header("Location: /pessoas");
         }
         break;
 
@@ -129,4 +128,7 @@ switch ($rota) {
                 $contatoController->excluirContato($id);
             }
             break;
+    default:
+        http_response_code(404);
+        echo "Página não encontrada";
 }
